@@ -17,7 +17,10 @@ class MyAppBar extends StatelessWidget {
       child: Row(
         children: [
           const IconButton(
-            icon: Icon(Icons.menu),
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
             tooltip: 'Navigation menu',
             onPressed: null, // null disables the button
           ),
