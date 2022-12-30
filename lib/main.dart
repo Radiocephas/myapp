@@ -1,82 +1,89 @@
 import 'package:flutter/material.dart';
+import 'container.dart';
+import 'listview.dart';
+import 'listview2.dart';
+import 'practice.dart';
 
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({required this.title, super.key});
+void main(List<String> args) {
+  runApp(NewsApp());
+}
 
-  // Fields in a Widget subclass are always marked "final".
-
-  final Widget title;
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 56.0, // in logical pixels
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      decoration: BoxDecoration(color: Colors.blue[500]),
-      // Row is a horizontal, linear layout.
-      child: Row(
-        children: [
-          const IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.white,
-            ),
-            tooltip: 'Navigation menu',
-            onPressed: null, // null disables the button
+    int count = 0;
+
+    int? increaseCounter() {
+      return count++;
+    }
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'New Flutter App',
+      home: Scaffold(
+        appBar: AppBar(
+          actions: [
+            Padding(
+                padding: EdgeInsets.only(right: 20),
+                child: Icon(
+                  Icons.add,
+                  size: 30,
+                ))
+          ],
+          leading: Icon(
+            Icons.safety_check,
+            size: 30,
           ),
-          // Expanded expands its child
-          // to fill the available space.
+          title: Text('New Flutter App'),
+          elevation: 0,
+          backgroundColor: Colors.green[900],
+        ),
+        body: Column(children: [
           Expanded(
-            child: title,
-          ),
-          const IconButton(
-            icon: Icon(Icons.search),
-            tooltip: 'Search',
-            onPressed: null,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MyScaffold extends StatelessWidget {
-  const MyScaffold({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // Material is a conceptual piece
-    // of paper on which the UI appears.
-    return Material(
-      // Column is a vertical, linear layout.
-      child: Column(
-        children: [
-          MyAppBar(
-            title: Text(
-              'Example title',
-              style: Theme.of(context) //
-                  .primaryTextTheme
-                  .headline6,
-            ),
-          ),
-          const Expanded(
+            flex: 5,
             child: Center(
-              child: Text('Hello, world!'),
+              child: Text(
+                '$count',
+                style: TextStyle(
+                  fontSize: 120,
+                ),
+              ),
             ),
           ),
-        ],
+          Expanded(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          count++;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                          elevation: 0, backgroundColor: Colors.green[900]),
+                      child: Row(
+                        children: [Icon(Icons.add), Text('Increase')],
+                      )),
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          elevation: 0, backgroundColor: Colors.red[900]),
+                      child: Row(
+                        children: [Icon(Icons.remove), Text('Decrease')],
+                      )),
+                ],
+              ))
+        ]),
       ),
     );
   }
-}
-
-void main() {
-  runApp(
-    const MaterialApp(
-      title: 'My app', // used by the OS task switcher
-      home: SafeArea(
-        child: MyScaffold(),
-      ),
-    ),
-  );
 }
