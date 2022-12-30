@@ -3,9 +3,10 @@ import 'container.dart';
 import 'listview.dart';
 import 'listview2.dart';
 import 'practice.dart';
+import 'bottom.dart';
 
 void main(List<String> args) {
-  runApp(NewsApp());
+  runApp(BottomApp());
 }
 
 class MyApp extends StatefulWidget {
