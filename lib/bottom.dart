@@ -77,6 +77,8 @@ class BottomApp extends StatelessWidget {
               separatorBuilder: ((context, index) => Divider(
                     thickness: 1,
                     height: 2,
+                    indent: 20,
+                    endIndent: 20,
                   )),
             ),
           )),
